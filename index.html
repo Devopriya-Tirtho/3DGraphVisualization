@@ -1,0 +1,42 @@
+<head>
+  <style> body { margin: 0; } </style>
+  <script src="//unpkg.com/3d-force-graph"></script>
+</head>
+
+<body>
+  <div id="3d-graph"></div>
+
+  <script>
+    const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+      .cooldownTime(600000) // Set to run for 10 minutes
+      .nodeLabel('id')
+      .nodeAutoColorBy('group')
+      .nodeColor(node => {
+        switch (node.group) {
+          case 1: return 'red';
+          case 2: return 'green';
+          case 3: return 'blue';
+		  case 4: return 'orange';
+          default: return 'gray'; // Default color for other groups
+        }
+      })
+      .linkOpacity(0.8) // Adjusted for visible links
+      .linkVisibility((link => link.value === 10000.0))// || (link.value >= 0.037395 && link.value <= 0.13188)) // Only show links with value 10000.0
+      .jsonUrl('Reduced_310.json')
+	  .onNodeClick(node => {
+          // Aim at node from outside it
+          const distance = 40;
+          const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+
+          const newPos = node.x || node.y || node.z
+            ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
+            : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+
+          Graph.cameraPosition(
+            newPos, // new position
+            node, // lookAt ({ x, y, z })
+            3000  // ms transition duration
+          );
+        });
+  </script>
+</body>
