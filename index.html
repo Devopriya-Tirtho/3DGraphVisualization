@@ -5,6 +5,7 @@
 
 <body>
 	<select id="dataset-selector">
+    <option value="network_data.json">Brassica Napus</option>
 	  <option value="Reduced_Bas_WT.json">Bacillus WT</option>
 	  <option value="Reduced_310.json">Bacillus 310</option>
 	  <option value="Reduced_311.json">Bacillus 311</option>
@@ -15,8 +16,6 @@
 	  <option value="Reduced_Bas_smcts_42C40m.json">Bacillus smcts_42C40m</option>
 	  <option value="Reduced_Bas_smcts_WT_42C20m.json">Bacillus smcts_WT_42C20m</option>
 	  <option value="Reduced_Bas_42C120.json">Bacillus 42C120</option>
-
-
 	  <option value="Reduced_GSM4698368_301_Wang_HiC_BWX4476_1mM_060m.matrix.json">Bacillus 301</option>
 	  <option value="Reduced_GSM4698370_303_Wang_HiC_BWX4463_1mM_060m.matrix.json">Bacillus 303</option>
 	  <option value="Reduced_GSM4698369_302_Wang_HiC_BWX4475_1mM_060m.matrix.json">Bacillus 302</option>
@@ -81,5 +80,36 @@
       const selectedDataset = e.target.value;
       Graph.jsonUrl(selectedDataset); // Load the selected dataset
     });
+	
+	
+	
+	  // Add a button to trigger the export of node coordinates in CSV format
+  const exportCsvBtn = document.createElement('button');
+  exportCsvBtn.textContent = 'Export Node Coordinates to CSV';
+  document.body.appendChild(exportCsvBtn);
+
+  exportCsvBtn.addEventListener('click', () => {
+    const graphData = Graph.graphData();
+    let csvContent = "data:text/csv;charset=utf-8,";
+    // Adding header row for CSV
+    csvContent += "id,x,y,z\n";
+
+    // Iterating over nodes to add their data to the CSV string
+    graphData.nodes.forEach(node => {
+      const row = [node.id, node.x, node.y, node.z].join(",");
+      csvContent += row + "\r\n";
+    });
+
+    // Encoding the CSV content and creating a data URI
+    const encodedUri = encodeURI(csvContent);
+    // Creating an anchor element to trigger the download
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "node_positions.csv");
+    document.body.appendChild(link); // Required for Firefox
+
+    link.click(); // Triggering the download
+    link.remove(); // Cleaning up the link
+  });
   </script>
 </body>
