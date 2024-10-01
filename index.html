@@ -1,53 +1,60 @@
 <head>
-  <style> body { margin: 0; } </style>
+  <style> 
+    body { margin: 0; } 
+    #execution-time { font-family: Arial, sans-serif; padding: 10px; }
+  </style>
   <script src="//unpkg.com/3d-force-graph"></script>
 </head>
 
 <body>
-	<select id="dataset-selector">
+  <!-- Dataset Selector Dropdown -->
+  <select id="dataset-selector">
+    <option value="Bacillus_full.json">Bacillus Full</option>
+    <option value="Bacillus_half.json">Bacillus Half</option>
+    <option value="Brassica_full.json">Brassica Full</option>
+    <option value="Brassica_half.json">Brassica Half</option>
+    <option value="Agro_full.json">Agro Full</option>
+    <option value="Agro_half.json">Agro Half</option>
     <option value="Basillus_42C120m.json">Basillus 42C120m</option>
-	  <option value="Basillus_42C45m.json">Basillus 42C45m</option>
-	  <option value="Basillus_30C.json">Basillus 30C</option>
+    <option value="Basillus_42C45m.json">Basillus 42C45m</option>
+    <option value="Basillus_30C.json">Basillus 30C</option>
     <option value="network_data.json">Brassica Napus</option>
-	  <option value="Reduced_Bas_WT.json">Bacillus WT</option>
-	  <option value="Reduced_310.json">Bacillus 310</option>
-	  <option value="Reduced_311.json">Bacillus 311</option>
-	  <option value="Reduced_312.json">Bacillus 312</option>
-	  <option value="Reduced_313.json">Bacillus 313</option>
-	  <option value="Reduced_314.json">Bacillus 314</option>
-	  <option value="Reduced_315.json">Bacillus 315</option>
-	  <option value="Reduced_Bas_smcts_42C40m.json">Bacillus smcts_42C40m</option>
-	  <option value="Reduced_Bas_smcts_WT_42C20m.json">Bacillus smcts_WT_42C20m</option>
-	  <option value="Reduced_Bas_42C120.json">Bacillus 42C120</option>
-	  <option value="Reduced_GSM4698368_301_Wang_HiC_BWX4476_1mM_060m.matrix.json">Bacillus 301</option>
-	  <option value="Reduced_GSM4698370_303_Wang_HiC_BWX4463_1mM_060m.matrix.json">Bacillus 303</option>
-	  <option value="Reduced_GSM4698369_302_Wang_HiC_BWX4475_1mM_060m.matrix.json">Bacillus 302</option>
-	  
-	  <option value="Reduced_2D_GSM5870441_446_Wang_HiC_AtWX286_ATGN.matrix.json">Agrobacterium 446</option>
-	  <option value="Reduced_2D_GSM5870440_445_Wang_HiC_AtWX121_ATGN.matrix.json">Agrobacterium 445</option>
-	  <option value="Reduced_2D_GSM5870439_444_Wang_HiC_AtWX110_ATGN.matrix.json">Agrobacterium 444</option>
-	  <option value="Reduced_2D_GSM5870438_443_Wang_HiC_AtWX283_ATGN.matrix.json">Agrobacterium 443</option>
-	  <option value="Reduced_2D_GSM5542437_401_Wang_HiC_AtWX063_ATGN.matrix.json">Agrobacterium 401</option>
-	  	  <option value="Reduced_GSM5870438_443_Wang_HiC_AtWX283_ATGN.matrix.json">Agrobacterium  443 AtWX283</option>
-	  <option value="Reduced_GSM5870465_470_Wang_HiC_IB173_ATGN.matrix.json">Agrobacterium  470 IB173</option>
-	  
-	  <option value="Reduced_GSM1379431_SPK567-corrected-matrix_hic.json">Yeast SPK567</option>
-	  <option value="Reduced_GSM1379429_SPTA333-corrected-matrix_hic.json">Yeast SPTA333</option>
-	  	  <option value="Reduced_GSM1379430_rad21ts-corrected-matrix_hic.json">Yeast Rad21</option>
-	  <option value="Reduced_GSM1379427_wt_999a-corrected-matrix_hic.json">Yeast WT</option>
+    <option value="Reduced_Bas_WT.json">Bacillus WT</option>
+    <option value="Reduced_310.json">Bacillus 310</option>
+    <option value="Reduced_311.json">Bacillus 311</option>
+    <option value="Reduced_312.json">Bacillus 312</option>
+    <option value="Reduced_313.json">Bacillus 313</option>
+    <option value="Reduced_314.json">Bacillus 314</option>
+    <option value="Reduced_315.json">Bacillus 315</option>
+    <option value="Reduced_Bas_smcts_42C40m.json">Bacillus smcts_42C40m</option>
+    <option value="Reduced_Bas_smcts_WT_42C20m.json">Bacillus smcts_WT_42C20m</option>
+    <option value="Reduced_Bas_42C120.json">Bacillus 42C120</option>
+    <option value="Reduced_GSM4698368_301_Wang_HiC_BWX4476_1mM_060m.matrix.json">Bacillus 301</option>
+    <option value="Reduced_GSM4698370_303_Wang_HiC_BWX4463_1mM_060m.matrix.json">Bacillus 303</option>
+    <option value="Reduced_GSM4698369_302_Wang_HiC_BWX4475_1mM_060m.matrix.json">Bacillus 302</option>
+    <option value="Reduced_2D_GSM5870441_446_Wang_HiC_AtWX286_ATGN.matrix.json">Agrobacterium 446</option>
+    <option value="Reduced_2D_GSM5870440_445_Wang_HiC_AtWX121_ATGN.matrix.json">Agrobacterium 445</option>
+    <option value="Reduced_2D_GSM5870439_444_Wang_HiC_AtWX110_ATGN.matrix.json">Agrobacterium 444</option>
+    <option value="Reduced_2D_GSM5870438_443_Wang_HiC_AtWX283_ATGN.matrix.json">Agrobacterium 443</option>
+    <option value="Reduced_2D_GSM5542437_401_Wang_HiC_AtWX063_ATGN.matrix.json">Agrobacterium 401</option>
+    <option value="Reduced_GSM5870438_443_Wang_HiC_AtWX283_ATGN.matrix.json">Agrobacterium  443 AtWX283</option>
+    <option value="Reduced_GSM5870465_470_Wang_HiC_IB173_ATGN.matrix.json">Agrobacterium  470 IB173</option>
+    <option value="Reduced_GSM1379431_SPK567-corrected-matrix_hic.json">Yeast SPK567</option>
+    <option value="Reduced_GSM1379429_SPTA333-corrected-matrix_hic.json">Yeast SPTA333</option>
+    <option value="Reduced_GSM1379430_rad21ts-corrected-matrix_hic.json">Yeast Rad21</option>
+    <option value="Reduced_GSM1379427_wt_999a-corrected-matrix_hic.json">Yeast WT</option>
+  </select>
 
+  <!-- Div for 3D Graph -->
+  <div id="3d-graph"></div>
 
-	  
-						  
-	  <!-- Add more datasets here -->
-	</select>
-	<div id="3d-graph"></div>
-
-
+  <!-- Div to display execution time -->
+  <div id="execution-time">Execution Time: N/A</div>
 
   <script>
+    // Initialize 3D Force Graph
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
-      .cooldownTime(600000) // Set to run for 10 minutes
+      .cooldownTime(24000) // Set cooldown to 24 seconds
       .nodeLabel('id')
       .nodeAutoColorBy('group')
       .nodeColor(node => {
@@ -55,64 +62,65 @@
           case 1: return 'red';
           case 2: return 'green';
           case 3: return 'blue';
-		  case 4: return 'orange';
-          default: return 'gray'; // Default color for other groups
+          case 4: return 'orange';
+          default: return 'gray';
         }
       })
-      .linkOpacity(0.8) // Adjusted for visible links
-      .linkVisibility((link => link.value === 10000.0))// || (link.value >= 0.037395 && link.value <= 0.13188)) // Only show links with value 10000.0
-      .jsonUrl('Reduced_310.json')
-	  .onNodeClick(node => {
-          // Aim at node from outside it
-          const distance = 40;
-          const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+      .linkOpacity(0.8)
+      .linkVisibility(link => link.value === 10000.0) // Only show links with value 10000.0
+      .jsonUrl('Reduced_310.json'); // Default dataset
 
-          const newPos = node.x || node.y || node.z
-            ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
-            : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
-
-          Graph.cameraPosition(
-            newPos, // new position
-            node, // lookAt ({ x, y, z })
-            3000  // ms transition duration
-          );
-        });
-		
-		    // Event listener for dataset selection
+    // Measure and display average execution time for 10 runs when dataset is selected
     document.getElementById('dataset-selector').addEventListener('change', function(e) {
       const selectedDataset = e.target.value;
-      Graph.jsonUrl(selectedDataset); // Load the selected dataset
+      const executionTimes = [];
+      let runs = 0;
+
+      const runGraph = () => {
+        const startTime = performance.now();
+
+        // Load the dataset and measure execution time
+        Graph.jsonUrl(selectedDataset).onEngineStop(() => {
+          const endTime = performance.now();
+          const executionTime = (endTime - startTime).toFixed(2); // Time in milliseconds
+          executionTimes.push(parseFloat(executionTime));
+
+          runs++;
+          if (runs < 10) {
+            runGraph(); // Run again until 10 runs are completed
+          } else {
+            // Calculate the average execution time after 10 runs
+            const avgExecutionTime = (executionTimes.reduce((a, b) => a + b, 0) / 10).toFixed(2);
+            document.getElementById('execution-time').textContent = `Average Execution Time: ${avgExecutionTime} ms`;
+          }
+        });
+      };
+
+      // Start the first run
+      runGraph();
     });
-	
-	
-	
-	  // Add a button to trigger the export of node coordinates in CSV format
-  const exportCsvBtn = document.createElement('button');
-  exportCsvBtn.textContent = 'Export Node Coordinates to CSV';
-  document.body.appendChild(exportCsvBtn);
 
-  exportCsvBtn.addEventListener('click', () => {
-    const graphData = Graph.graphData();
-    let csvContent = "data:text/csv;charset=utf-8,";
-    // Adding header row for CSV
-    csvContent += "id,x,y,z\n";
+    // Button to export node coordinates to CSV
+    const exportCsvBtn = document.createElement('button');
+    exportCsvBtn.textContent = 'Export Node Coordinates to CSV';
+    document.body.appendChild(exportCsvBtn);
 
-    // Iterating over nodes to add their data to the CSV string
-    graphData.nodes.forEach(node => {
-      const row = [node.id, node.x, node.y, node.z].join(",");
-      csvContent += row + "\r\n";
+    exportCsvBtn.addEventListener('click', () => {
+      const graphData = Graph.graphData();
+      let csvContent = "data:text/csv;charset=utf-8," + "id,x,y,z\n";
+
+      graphData.nodes.forEach(node => {
+        const row = [node.id, node.x, node.y, node.z].join(",");
+        csvContent += row + "\r\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "node_positions.csv");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     });
-
-    // Encoding the CSV content and creating a data URI
-    const encodedUri = encodeURI(csvContent);
-    // Creating an anchor element to trigger the download
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "node_positions.csv");
-    document.body.appendChild(link); // Required for Firefox
-
-    link.click(); // Triggering the download
-    link.remove(); // Cleaning up the link
-  });
   </script>
 </body>
